@@ -9,14 +9,21 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Himanshu",
     "section": "",
-    "text": "About this blog"
+    "text": "Hello! Follow along my journey to learn together."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Himanshu",
+    "section": "Education",
+    "text": "Education\nUniversity of Arkansas | Fayetteville, AR MS in Computer Science | August 2024 - May 2026\nVirginia Tech | Blacksburg, VA BS in Computer Science | August 2017 - May 2021"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "blog",
+    "title": "Musings",
     "section": "",
     "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nSep 12, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nSep 9, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
