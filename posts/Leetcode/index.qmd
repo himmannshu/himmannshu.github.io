@@ -1,0 +1,37 @@
+---
+title: "LeetCode Problem Solving Tracker"
+author: "Your Name"
+format: markdown
+execute:
+  echo: false
+  python: true
+---
+
+# LeetCode Problem Solving Tracker
+
+Below is a list of problems I'm working on, including the number of times I've encountered them and space to write notes.
+
+```{python}
+# Read the text file with problem data
+file_path = "problems.txt"
+
+# List to store parsed problems
+problems = []
+
+# Reading the file
+with open(file_path, "r") as file:
+    for line in file:
+        name, count, url = line.strip().split(',')
+        problems.append({
+            'name': name,
+            'count': int(count),
+            'url': url
+        })
+
+# Generate markdown for each problem
+for i, problem in enumerate(problems, 1):
+    print(f"### {i}. [{problem['name']} ({problem['count']} times)]({problem['url']})")
+    print(f"- [ ] Solved")
+    print("**Notes:**")
+    print("_Write a brief note about the problem here..._\n")
+    print("---\n")
