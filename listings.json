@@ -2,7 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/Leetcode/index.md",
+      "/posts/Leetcode/index.html",
       "/posts/intro-to-llm/index.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
