@@ -7,6 +7,41 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
+    "objectID": "posts/intro-to-llm/index.html",
+    "href": "posts/intro-to-llm/index.html",
+    "title": "Intro to LLMs",
+    "section": "",
+    "text": "This is a post about LLMs. Summary from Andrej Karpathy’s talk “Intro to Large Language Models”."
+  },
+  {
+    "objectID": "posts/intro-to-llm/index.html#what-is-a-large-language-model",
+    "href": "posts/intro-to-llm/index.html#what-is-a-large-language-model",
+    "title": "Intro to LLMs",
+    "section": "What is a Large Language Model?",
+    "text": "What is a Large Language Model?\nLarge Language Models (LLMs) are a type of machine learning model that are designed to understand and generate human language. They are typically trained on massive amounts of text data, and they use this training to learn the patterns and structures of language.\nLLMs are used for a wide range of tasks, including language translation, text summarization, question answering, and more. They are also used in chatbots, virtual assistants, and other applications that require natural language processing."
+  },
+  {
+    "objectID": "posts/intro-to-llm/index.html#raw-notes",
+    "href": "posts/intro-to-llm/index.html#raw-notes",
+    "title": "Intro to LLMs",
+    "section": "Raw Notes",
+    "text": "Raw Notes\n\n2 files\n\nparameters file\ncode file that runs the parameters ~ neural network architecture\n\n\nModel Inference: running the model with a given set of parameters on a particular input - input: string - output: string\nModel Training: updating the parameters of the model to improve its performance on a particular task - input: string - output: string\nNeural Network predicts the next token in the sequence. - token: a word or character in the text\nPretraining(self-supervised learning): - large corpus of text data - feed the text into the neural network - update the parameters of the neural network - repeat for many epochs - happens once a year because it’s very expensive - compresses the data into a neural network\nFinetuning (alighnment): - smaller dataset - faster to train - better for a specific task - happens once a month/week\nStage 3 - RLHF (Reinforcement Learning from Human Feedback) - Supervised Learning - human writes a prompt - model writes a response - human judges the response - human provides feedback to the model - model updates the parameters"
+  },
+  {
+    "objectID": "posts/intro-to-llm/index.html#how-to-make-a-llm",
+    "href": "posts/intro-to-llm/index.html#how-to-make-a-llm",
+    "title": "Intro to LLMs",
+    "section": "How to make a LLM?",
+    "text": "How to make a LLM?\n\nCollect a corpus of text data.\nPreprocess the data into tokens.\nCreate a vocabulary of tokens.\nTrain a neural network to predict the next token in the sequence.\nUse the trained model to generate text."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Musings",
+    "section": "",
+    "text": "LeetCode Problem Solving Tracker\n\n\n\n\n\n\n\n\n\n\n\nYour Name\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to LLMs\n\n\n\n\n\n\nLLMs\n\n\n\n\n\n\n\n\n\nSep 27, 2024\n\n\nHimanshu\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nSep 12, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nSep 9, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Himanshu",
@@ -21,11 +56,11 @@
     "text": "Education\nUniversity of Arkansas | Fayetteville, AR MS in Computer Science | August 2024 - May 2026\nVirginia Tech | Blacksburg, VA BS in Computer Science | August 2017 - May 2021"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Musings",
-    "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nSep 12, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nSep 9, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "Himanshu",
+    "section": "Experience",
+    "text": "Experience"
   },
   {
     "objectID": "posts/post-with-code/index.html",
