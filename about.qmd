@@ -13,7 +13,13 @@ about:
 
 ---
 
-Hello! Follow along my journey to learn together. 
+Hey there! I’m Himanshu—a curious computer science grad student navigating the wonderful chaos of code, data, and the occasional tennis ball. Welcome to my little corner of the internet!
+
+This is where I spill the tea (and maybe some coffee) on the cool stuff I’m learning and building. Right now, I’m neck-deep in classes like AR, AI & ML in Financial Analytics, Advanced Database Systems, and Full Stack Deep Learning—because, why not juggle four challenges at once? Oh, and I’m slowly but surely making my way through the Deep Learning book. (Spoiler: It’s a journey, not a sprint.)
+
+When I’m not debugging code or brainstorming projects, you’ll probably find me lifting at the gym, experimenting in the kitchen with some decent (sometimes spectacular!) Indian dishes, or trying to perfect my tennis backhand—weather and time permitting. I’m all about finding a balance between brainy and brawny.
+
+So, grab a cup of chai (or coffee, no judgment), and join me as I blog about my adventures in tech, the occasional life hack, and maybe even a recipe or two. Let’s make this a fun and inspiring ride!
 
 ## Education 
 
@@ -25,3 +31,8 @@ BS in Computer Science | August 2017 - May 2021
 ---
 ## Experience
 
+University of Arkansas | Fayetteville, AR
+Graduate Assistant - Data Analyst | August 2024 - Present
+
+Dematic | Grand Rapids, MI
+Software Engineer | October 2021 - July 2024
