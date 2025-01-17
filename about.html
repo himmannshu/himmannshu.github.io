@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,10 +34,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-71b524dec96102423751058e7b90dd16.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,7 +137,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
   </div>
   <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>Hello! Follow along my journey to learn together.</p>
+<p>Hey there! I’m Himanshu—a curious computer science grad student navigating the wonderful chaos of code, data, and the occasional tennis ball. Welcome to my little corner of the internet!</p>
+<p>This is where I spill the tea (and maybe some coffee) on the cool stuff I’m learning and building. Right now, I’m neck-deep in classes like AR, AI &amp; ML in Financial Analytics, Advanced Database Systems, and Full Stack Deep Learning—because, why not juggle four challenges at once? Oh, and I’m slowly but surely making my way through the Deep Learning book. (Spoiler: It’s a journey, not a sprint.)</p>
+<p>When I’m not debugging code or brainstorming projects, you’ll probably find me lifting at the gym, experimenting in the kitchen with some decent (sometimes spectacular!) Indian dishes, or trying to perfect my tennis backhand—weather and time permitting. I’m all about finding a balance between brainy and brawny.</p>
+<p>So, grab a cup of chai (or coffee, no judgment), and join me as I blog about my adventures in tech, the occasional life hack, and maybe even a recipe or two. Let’s make this a fun and inspiring ride!</p>
 <section id="education" class="level2">
 <h2 data-anchor-id="education">Education</h2>
 <p>University of Arkansas | Fayetteville, AR MS in Computer Science | August 2024 - May 2026</p>
@@ -146,6 +149,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="experience" class="level2">
 <h2 data-anchor-id="experience">Experience</h2>
+<p>University of Arkansas | Fayetteville, AR Graduate Assistant - Data Analyst | August 2024 - Present</p>
+<p>Dematic | Grand Rapids, MI Software Engineer | October 2021 - July 2024</p>
 
 
 </section>
@@ -227,8 +232,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -339,7 +342,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

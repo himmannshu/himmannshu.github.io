@@ -1,10 +1,31 @@
 [
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Musings",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "Intro to LLMs\n\n\n\n\n\n\nLLMs\n\n\n\n\n\n\n\n\n\nSep 27, 2024\n\n\nHimanshu\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Himanshu",
+    "section": "",
+    "text": "Hey there! I’m Himanshu—a curious computer science grad student navigating the wonderful chaos of code, data, and the occasional tennis ball. Welcome to my little corner of the internet!\nThis is where I spill the tea (and maybe some coffee) on the cool stuff I’m learning and building. Right now, I’m neck-deep in classes like AR, AI & ML in Financial Analytics, Advanced Database Systems, and Full Stack Deep Learning—because, why not juggle four challenges at once? Oh, and I’m slowly but surely making my way through the Deep Learning book. (Spoiler: It’s a journey, not a sprint.)\nWhen I’m not debugging code or brainstorming projects, you’ll probably find me lifting at the gym, experimenting in the kitchen with some decent (sometimes spectacular!) Indian dishes, or trying to perfect my tennis backhand—weather and time permitting. I’m all about finding a balance between brainy and brawny.\nSo, grab a cup of chai (or coffee, no judgment), and join me as I blog about my adventures in tech, the occasional life hack, and maybe even a recipe or two. Let’s make this a fun and inspiring ride!"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Himanshu",
+    "section": "Education",
+    "text": "Education\nUniversity of Arkansas | Fayetteville, AR MS in Computer Science | August 2024 - May 2026\nVirginia Tech | Blacksburg, VA BS in Computer Science | August 2017 - May 2021"
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "Himanshu",
+    "section": "Experience",
+    "text": "Experience\nUniversity of Arkansas | Fayetteville, AR Graduate Assistant - Data Analyst | August 2024 - Present\nDematic | Grand Rapids, MI Software Engineer | October 2021 - July 2024"
   },
   {
     "objectID": "posts/intro-to-llm/index.html",
@@ -33,54 +54,5 @@
     "title": "Intro to LLMs",
     "section": "How to make a LLM?",
     "text": "How to make a LLM?\n\nCollect a corpus of text data.\nPreprocess the data into tokens.\nCreate a vocabulary of tokens.\nTrain a neural network to predict the next token in the sequence.\nUse the trained model to generate text."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Musings",
-    "section": "",
-    "text": "LeetCode Problem Solving Tracker\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2024\n\n\nHimanshu\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to LLMs\n\n\n\n\n\n\nLLMs\n\n\n\n\n\n\n\n\n\nSep 27, 2024\n\n\nHimanshu\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nSep 12, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nSep 9, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Himanshu",
-    "section": "",
-    "text": "Hello! Follow along my journey to learn together."
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "Himanshu",
-    "section": "Education",
-    "text": "Education\nUniversity of Arkansas | Fayetteville, AR MS in Computer Science | August 2024 - May 2026\nVirginia Tech | Blacksburg, VA BS in Computer Science | August 2017 - May 2021"
-  },
-  {
-    "objectID": "about.html#experience",
-    "href": "about.html#experience",
-    "title": "Himanshu",
-    "section": "Experience",
-    "text": "Experience"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code."
-  },
-  {
-    "objectID": "posts/Leetcode/index.html",
-    "href": "posts/Leetcode/index.html",
-    "title": "LeetCode Problem Solving Tracker",
-    "section": "",
-    "text": "Below is a list of problems I’m working on:\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n… (Continue similarly for the rest of the problems)"
-  },
-  {
-    "objectID": "posts/Leetcode/index.html#problem-list",
-    "href": "posts/Leetcode/index.html#problem-list",
-    "title": "LeetCode Problem Solving Tracker",
-    "section": "",
-    "text": "Solved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n\n\n\n\nSolved\nNotes: Write a brief note about the problem here…\n\n\n… (Continue similarly for the rest of the problems)"
   }
 ]
