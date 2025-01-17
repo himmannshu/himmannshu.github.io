@@ -2,7 +2,7 @@
 title: "Intro to LLMs"
 author: "Himanshu"
 date: "2024-09-27"
-categories: [LLMs]
+image: images/llm.jpg
 ---
 
 This is a post about LLMs. Summary from Andrej Karpathy's talk "Intro to Large Language Models".
