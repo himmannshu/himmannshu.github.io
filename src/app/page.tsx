@@ -73,7 +73,7 @@ export default function Home() {
         </a>
 
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://www.linkedin.com/in/himanshu00/"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
@@ -88,7 +88,7 @@ export default function Home() {
             Connect with me professionally
           </p>
         </a>
-
+        {/*
         <a
           href="mailto:youremail@example.com"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -103,6 +103,7 @@ export default function Home() {
             Get in touch with me
           </p>
         </a>
+        */}
       </div>
     </main>
   )
