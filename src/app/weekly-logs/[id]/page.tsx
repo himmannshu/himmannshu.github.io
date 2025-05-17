@@ -14,13 +14,13 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function WeeklyLog({ params }: { params: { id: string } }) {
-  const { id } = params
+export default async function WeeklyLog({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const filePath = path.join(LOGS_DIR, `${id}.md`)
   let fileContent
   try {
     fileContent = await fs.readFile(filePath, 'utf8')
-  } catch (e) {
+  } catch {
     notFound()
   }
   const { data, content } = matter(fileContent || '')
