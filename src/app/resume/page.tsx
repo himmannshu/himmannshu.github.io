@@ -165,9 +165,7 @@ export default function Resume() {
           <div className="w-full">
             <h2 className="text-xl font-semibold mb-2 border-b pb-1 text-white">Certifications & Awards</h2>
             <ul className="list-disc pl-5 text-sm text-gray-200">
-              <li>AWS Certified Solutions Architect – Associate</li>
-              <li>Unity Certified Associate: Game Developer</li>
-              <li>Dean's List, Virginia Tech (2018-2021)</li>
+              <li>Innovation & Initiative Award, University of Arkansas (2025)</li>
             </ul>
           </div>
         </aside>
