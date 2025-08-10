@@ -85,3 +85,12 @@ export function parseWeekId(weekId: string): { year: number; weekNumber: number 
     weekNumber: parseInt(match[2], 10)
   };
 } 
+
+/**
+ * Format an ISO date string into a human‑readable short format, e.g., "Dec 25, 2023"
+ */
+export function formatDateShort(isoDate: string): string {
+  const d = new Date(isoDate);
+  if (Number.isNaN(d.getTime())) return isoDate;
+  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+}

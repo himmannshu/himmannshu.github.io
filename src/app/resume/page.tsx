@@ -1,15 +1,54 @@
 "use client";
 import Link from 'next/link'
 import Image from 'next/image';
+import Script from 'next/script';
 
 export default function Resume() {
+  function ProficiencyDots({ level = 3, max = 5 }: { level?: number; max?: number }) {
+    return (
+      <span aria-label={`Proficiency ${level} of ${max}`} className="inline-flex items-center gap-0.5 align-middle ml-1">
+        {Array.from({ length: max }).map((_, i) => (
+          <span
+            key={i}
+            className={
+              "inline-block w-1.5 h-1.5 rounded-full " + (i < level ? "bg-emerald-400" : "bg-gray-600")
+            }
+          />
+        ))}
+      </span>
+    );
+  }
+
+  function renderMetricText(text: string) {
+    const regex = /(\b\d+[\+%]?\b|\b\d{1,3}(,\d{3})*(\.\d+)?\b\s?(hours?|students?|months?|%|points?)\b)/gi;
+    const parts = text.split(regex);
+    return (
+      <>
+        {parts.map((part, idx) =>
+          regex.test(part) ? (
+            <span key={idx} className="text-emerald-400 font-semibold">{part}</span>
+          ) : (
+            <span key={idx}>{part}</span>
+          )
+        )}
+      </>
+    );
+  }
+
+  const languageSkills: Array<{ label: string; level: number }> = [
+    { label: 'Java', level: 4 },
+    { label: 'JavaScript/TypeScript', level: 4 },
+    { label: 'Python', level: 3 },
+    { label: 'SQL', level: 3 },
+    { label: 'C#', level: 2 },
+  ];
   const projects = [
     {
       title: 'Financial Research Agent',
       description:
         'Multi‑agent LLM pipeline that synthesizes decades of fundamentals and real‑time news into an exportable markdown report. Built with LangChain, OpenAI, and Streamlit.',
       github: 'https://github.com/himmannshu/stock-market-agents',
-      image: '/images/financial-research-agent.png',
+      image: '/images/financial-research-agent.jpg',
       tech: ['LangChain', 'OpenAI', 'Streamlit'],
     },
     {
@@ -17,7 +56,7 @@ export default function Resume() {
       description:
         'Mixed‑reality Quest 3 game with gesture‑based spell‑casting, enemy AI, and real‑world occlusion. Built in Unity XR Hands & MR Utility Kit.',
       github: 'https://github.com/himmannshu/ar-final-project',
-      image: '/images/danse-macabre.png',
+      image: '/images/danse-macabre.jpg',
       tech: ['Unity', 'XR Hands', 'MR Utility Kit'],
     },
   ];
@@ -41,7 +80,7 @@ export default function Resume() {
             <p className="text-base text-gray-300 mb-2 text-center md:text-left">
               MS CS candidate & AI/ML enthusiast focused on building data‑driven products that bridge machine intelligence with immersive user experiences.
             </p>
-            <div className="flex gap-3 mt-2 mb-2">
+            <div className="flex gap-3 mt-2 mb-2 text-gray-300">
               <a
                 href="https://github.com/himmannshu"
                 target="_blank"
@@ -53,31 +92,27 @@ export default function Resume() {
                   <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.58.688.482C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z" />
                 </svg>
               </a>
-              <a
-                href="https://www.linkedin.com/in/himanshu00/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full dark:bg-gray-700 bg-gray-700 hover:bg-gray-600 transition-colors"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-blue-400">
-                  <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.966 0-1.75-.79-1.75-1.76 0-.97.784-1.76 1.75-1.76s1.75.79 1.75 1.76c0 .97-.784 1.76-1.75 1.76zm13.5 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v5.59z" />
-                </svg>
-              </a>
+              <div className="h-9 w-px bg-gray-700" aria-hidden="true" />
+              <a href="https://www.linkedin.com/in/himanshu00/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:underline focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">LinkedIn</a>
+              <span aria-hidden="true">•</span>
+              <a href="mailto:himanshu@example.com" className="hover:underline focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">Email</a>
+              <span aria-hidden="true">•</span>
+              <span className="text-gray-400">Fayetteville, AR</span>
             </div>
           </div>
           {/* Skills */}
           <div className="w-full">
-            <h2 className="text-xl font-semibold mb-2 border-b pb-1 text-white">Skills</h2>
+            <h2 id="skills" className="scroll-mt-24 text-xl font-semibold mb-2 border-b pb-1 text-white">Skills</h2>
             <div className="grid grid-cols-1 gap-2">
               <div>
                 <h3 className="text-lg font-medium mb-1 text-white">Languages</h3>
                 <div className="flex flex-wrap gap-2">
-                  <span className="inline-block bg-blue-900 text-blue-200 rounded-full px-3 py-1 text-sm font-semibold">Java</span>
-                  <span className="inline-block bg-blue-900 text-blue-200 rounded-full px-3 py-1 text-sm font-semibold">JavaScript/TypeScript</span>
-                  <span className="inline-block bg-blue-900 text-blue-200 rounded-full px-3 py-1 text-sm font-semibold">Python</span>
-                  <span className="inline-block bg-blue-900 text-blue-200 rounded-full px-3 py-1 text-sm font-semibold">SQL</span>
-                  <span className="inline-block bg-blue-900 text-blue-200 rounded-full px-3 py-1 text-sm font-semibold">C#</span>
+                  {languageSkills.map((s) => (
+                    <span key={s.label} className="inline-flex items-center bg-blue-900 text-blue-200 rounded-full px-3 py-1 text-sm font-semibold">
+                      {s.label}
+                      <ProficiencyDots level={s.level} />
+                    </span>
+                  ))}
                 </div>
               </div>
               <div>
@@ -136,7 +171,7 @@ export default function Resume() {
           </div>
           {/* Education */}
           <div className="w-full rounded-xl bg-gray-800 border border-gray-700 p-4 mb-2 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2 border-b pb-1 flex items-center gap-2 text-white">
+            <h2 id="education" className="scroll-mt-24 text-xl font-semibold mb-2 border-b pb-1 flex items-center gap-2 text-white">
               <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0 0H6m6 0h6" /></svg>
               Education
             </h2>
@@ -163,7 +198,7 @@ export default function Resume() {
           </div>
           {/* Certifications & Awards */}
           <div className="w-full">
-            <h2 className="text-xl font-semibold mb-2 border-b pb-1 text-white">Certifications & Awards</h2>
+            <h2 id="certifications" className="scroll-mt-24 text-xl font-semibold mb-2 border-b pb-1 text-white">Certifications & Awards</h2>
             <ul className="list-disc pl-5 text-sm text-gray-200">
               <li>Innovation & Initiative Award, University of Arkansas (2025)</li>
             </ul>
@@ -171,32 +206,117 @@ export default function Resume() {
         </aside>
         {/* Main Content */}
         <section className="md:col-span-2 flex flex-col gap-12 w-full" aria-label="Main resume content">
-          {/* Download PDF Resume Button */}
-          <div className="flex justify-end mb-4">
-            <a
-              href="/resume.pdf"
-              download
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+          {/* Top Actions */}
+          <div className="no-print flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mb-4">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-blue-400 hover:text-blue-200 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 rounded px-2 py-1 w-fit"
+              aria-label="Back to Home"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
-              Download PDF Resume
-            </a>
+              Back to Home
+            </Link>
+            <div className="flex items-center gap-2">
+              <a
+                href="/resume.pdf"
+                download
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                Download PDF
+              </a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg shadow hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 13v6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 3h6v6M10 14L21 3" />
+                </svg>
+                Open PDF
+              </a>
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white font-semibold rounded-lg shadow hover:bg-emerald-500 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6v-8z" />
+                </svg>
+                Print
+              </button>
+            </div>
           </div>
-          {/* Back to Home Button (always visible at top of main content) */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 mb-6 text-blue-400 hover:text-blue-200 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 rounded px-2 py-1 w-fit"
-            aria-label="Back to Home"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Home
-          </Link>
+
+          {/* Quick Navigation */}
+          <nav role="navigation" aria-label="Resume section navigation" className="no-print sticky top-2 z-20 -mt-2 flex flex-wrap gap-2 bg-gray-900/60 backdrop-blur supports-[backdrop-filter]:bg-gray-900/50 px-2 py-2 rounded-xl border border-gray-700">
+            {[
+              { href: '#about', label: 'About' },
+              { href: '#experience', label: 'Experience' },
+              { href: '#projects', label: 'Projects' },
+              { href: '#education', label: 'Education' },
+              { href: '#skills', label: 'Skills' },
+              { href: '#certifications', label: 'Certifications' },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-xs md:text-sm inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gray-800 border border-gray-700 text-gray-200 hover:bg-gray-700"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* About */}
+          <section id="about" className="scroll-mt-24 rounded-2xl shadow-lg bg-gray-800 p-8 border border-gray-700" aria-label="About">
+            <h2 className="text-2xl font-semibold mb-3 border-b pb-2 text-white">About</h2>
+            <p className="text-gray-300 leading-relaxed">
+              I am a MS CS candidate and AI/ML enthusiast focused on building data‑driven products that bridge machine intelligence with immersive user experiences.
+              I enjoy solving ambiguous problems, designing thoughtful interfaces, and shipping high‑quality software.
+            </p>
+          </section>
+
+          {/* Featured Project */}
+          {projects.length > 0 && (
+            <section id="featured" className="scroll-mt-24">
+              <div className="rounded-2xl shadow-lg bg-gray-800 p-8 border border-gray-700">
+                <h2 className="text-3xl font-semibold mb-6 border-b pb-3 text-white">Featured Project</h2>
+                <article className="flex flex-col lg:flex-row gap-8">
+                  <div className="w-full lg:w-2/5">
+                    <Image
+                      src={projects[0].image || '/images/project-placeholder.png'}
+                      alt={(projects[0].title || 'Featured') + ' screenshot'}
+                      width={960}
+                      height={540}
+                      className="rounded-xl object-cover border border-gray-700"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-semibold text-white mb-2">{projects[0].title}</h3>
+                    <p className="text-gray-300 mb-4">{projects[0].description}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {projects[0].tech?.map((t) => (
+                        <span key={t} className="inline-block bg-purple-900 text-purple-200 rounded-full px-3 py-1 text-xs font-semibold">{t}</span>
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Link href={projects[0].github} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">View on GitHub →</Link>
+                      <Link href={projects[0].github} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:underline">Read case study →</Link>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          )}
           {/* Projects */}
-          <section className="mb-0">
+          <section id="projects" className="scroll-mt-24 mb-0">
             <div className="rounded-2xl shadow-lg bg-gray-800 p-8 border border-gray-700">
               <h2 className="text-3xl font-semibold mb-8 border-b pb-3 text-white">Projects</h2>
               <div className="grid gap-6">
@@ -241,7 +361,7 @@ export default function Resume() {
             </div>
           </section>
           {/* Professional Experience */}
-          <section className="mb-0">
+          <section id="experience" className="scroll-mt-24 mb-0">
             <div className="rounded-2xl shadow-lg bg-gray-800 p-8 border border-gray-700">
               <h2 className="text-2xl font-semibold mb-4 border-b pb-2 text-white">Professional Experience</h2>
 
@@ -266,7 +386,7 @@ export default function Resume() {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
                           </span>
-                          <span className="text-gray-200">{item}</span>
+                          <span className="text-gray-200">{renderMetricText(item)}</span>
                         </li>
                       ))}
                     </ul>
@@ -296,7 +416,7 @@ export default function Resume() {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
                           </span>
-                          <span className="text-gray-200">{item}</span>
+                          <span className="text-gray-200">{renderMetricText(item)}</span>
                         </li>
                       ))}
                     </ul>
@@ -323,7 +443,7 @@ export default function Resume() {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
                           </span>
-                          <span className="text-gray-200">{item}</span>
+                          <span className="text-gray-200">{renderMetricText(item)}</span>
                         </li>
                       ))}
                     </ul>
@@ -350,7 +470,7 @@ export default function Resume() {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
                           </span>
-                          <span className="text-gray-200">{item}</span>
+                          <span className="text-gray-200">{renderMetricText(item)}</span>
                         </li>
                       ))}
                     </ul>
@@ -361,6 +481,31 @@ export default function Resume() {
           </section>
         </section>
       </div>
+      {/* JSON-LD structured data for SEO */}
+      <Script id="person-ld" type="application/ld+json">
+        {JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: 'Fnu Himanshu',
+          jobTitle: 'MS CS Candidate',
+          address: { '@type': 'PostalAddress', addressLocality: 'Fayetteville', addressRegion: 'AR', addressCountry: 'US' },
+          sameAs: [
+            'https://github.com/himmannshu',
+            'https://www.linkedin.com/in/himanshu00/'
+          ],
+          hasPart: projects.map(p => ({
+            '@type': 'CreativeWork',
+            name: p.title,
+            url: p.github
+          }))
+        })}
+      </Script>
+      <style jsx>{`
+        @media print {
+          .no-print { display: none !important; }
+          body { background: #ffffff !important; }
+        }
+      `}</style>
     </main>
   )
 }

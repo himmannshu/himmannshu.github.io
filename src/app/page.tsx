@@ -1,20 +1,28 @@
 'use client';
-// @ts-ignore
-import type { Value as HeatmapValue } from 'react-calendar-heatmap';
-// declare module 'react-calendar-heatmap';
-
-// Add this at the top of the file or in a .d.ts file if needed
-// declare module 'react-calendar-heatmap' {
-//   const CalendarHeatmap: any;
-//   export default CalendarHeatmap;
-// }
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-// Use 'any' for the dynamic import to avoid type errors
-const CalendarHeatmap: any = dynamic(() => import('react-calendar-heatmap'), { ssr: false });
+type HeatmapValue = { date: string; count: number }
+type CalendarHeatmapProps = {
+  startDate: Date;
+  endDate: Date;
+  values: HeatmapValue[];
+  showMonthLabels?: boolean;
+  showWeekdayLabels?: boolean;
+  monthLabelAttributes?: Record<string, unknown>;
+  weekdayLabelAttributes?: Record<string, unknown>;
+  classForValue?: (value: HeatmapValue | null) => string;
+  gutterSize?: number;
+  titleForValue?: (value: HeatmapValue | null) => string;
+  tooltipDataAttrs?: (value: HeatmapValue) => Record<string, string>;
+};
+
+const CalendarHeatmap = dynamic<CalendarHeatmapProps>(
+  () => import('react-calendar-heatmap') as unknown as Promise<React.ComponentType<CalendarHeatmapProps>>, 
+  { ssr: false }
+);
 
 type ActivityEntry = {
   date: string;
@@ -71,10 +79,18 @@ export default function Home() {
   const [totals, setTotals] = useState<Totals>({ leetcode: 0, cses: 0, codeforces: 0 });
   const [streaks, setStreaks] = useState<Streaks>({ currentStreak: 0, longestStreak: 0 });
   const [lastUpdated, setLastUpdated] = useState<string>('');
+  const [isStale, setIsStale] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch('/problem-solving-activity.json')
-      .then((res) => res.json())
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+    const url = `${basePath}/problem-solving-activity.json`;
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to fetch activity data: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data: ActivityEntry[]) => {
         const sortedData = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         setActivity(sortedData);
@@ -84,7 +100,19 @@ export default function Home() {
           codeforces: sortedData.reduce((a, b) => a + b.codeforces, 0),
         });
         setStreaks(getStreaks(sortedData));
-        setLastUpdated(sortedData.length ? sortedData[sortedData.length - 1].date : '');
+        const lu = sortedData.length ? sortedData[sortedData.length - 1].date : '';
+        setLastUpdated(lu);
+        if (lu) {
+          const now = new Date();
+          const diffDays = Math.floor((now.getTime() - new Date(lu).getTime()) / (1000 * 60 * 60 * 24));
+          setIsStale(diffDays > 90);
+        } else {
+          setIsStale(true);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Failed to load activity data', error);
         setLoading(false);
       });
   }, []);
@@ -135,12 +163,20 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-6 pb-16">
         {/* Hero Section */}
         <section className="text-center py-16">
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-            Himanshu's Portfolio
+          <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            Himanshu
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Welcome to my personal website where I share my weekly learnings and professional experience.
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">
+            MS CS candidate building ML‑driven products with thoughtful UX.
           </p>
+          <div className="flex justify-center gap-3">
+            <Link href="/resume" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+              View Resume
+            </Link>
+            <Link href="/weekly-logs" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 bg-white/70 dark:bg-gray-800/70 hover:bg-white dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+              Explore Logs
+            </Link>
+          </div>
         </section>
 
         {/* Navigation Cards (Moved Up) */}
@@ -159,7 +195,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Check out what I learned each week - my journey of continuous learning and growth.
+                Check out what I learned each week — my journey of continuous learning and growth.
               </p>
               <div className="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:translate-x-2 transition-transform">
                 Explore logs
@@ -209,6 +245,14 @@ export default function Home() {
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
               <p className="text-gray-500 mt-4">Loading activity...</p>
             </div>
+          ) : activity.length === 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <StatCard label="LeetCode" value={0} color="bg-gradient-to-br from-yellow-400 to-orange-500 text-white" icon="💛" />
+              <StatCard label="CSES" value={0} color="bg-gradient-to-br from-green-400 to-emerald-500 text-white" icon="💚" />
+              <StatCard label="Codeforces" value={0} color="bg-gradient-to-br from-blue-400 to-indigo-500 text-white" icon="💙" />
+              <StatCard label="Current Streak" value={0} color="bg-gradient-to-br from-pink-400 to-rose-500 text-white" icon="🔥" />
+              <StatCard label="Longest Streak" value={0} color="bg-gradient-to-br from-purple-400 to-violet-500 text-white" icon="🏆" />
+            </div>
           ) : (
             <div className="space-y-10">
               {/* Stats Cards */}
@@ -245,66 +289,88 @@ export default function Home() {
                 />
               </div>
 
-              {/* Heatmap - GitHub Style */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6 text-center">
-                  Contribution Heatmap (Last Year)
-                </h3>
-                <div className="overflow-x-auto pb-4">
-                  <CalendarHeatmap
-                    startDate={startDate} // Dynamically set to 1 year ago
-                    endDate={today}     // Dynamically set to today
-                    values={heatmapValues}
-                    showMonthLabels={true}
-                    showWeekdayLabels={true}
-                    monthLabelAttributes={{ style: { fontSize: '10px', fill: '#9ca3af' } }} // Tailwind gray-400
-                    weekdayLabelAttributes={{ style: { fontSize: '10px', fill: '#9ca3af' } }}
-                    classForValue={(value: { count: number; date: string } | null) => {
-                      if (!value || value.count === 0) return 'color-github-0';
-                      if (value.count <= 1) return 'color-github-1';
-                      if (value.count <= 2) return 'color-github-2';
-                      if (value.count <= 3) return 'color-github-3';
-                      return 'color-github-4';
-                    }}
-                    gutterSize={2}
-                    titleForValue={(value: { date: string; count: number} | null) => value ? `${value.count} contributions on ${new Date(value.date).toLocaleDateString()}` : 'No contributions'}
-                    tooltipDataAttrs={(value: { date: string; count: number}) => ({ 'data-tip': `${value.count} contributions on ${new Date(value.date).toLocaleDateString()}` })}
-                  />
+              {/* Heatmap or Summary Fallback */}
+              {!isStale && heatmapValues.length > 0 ? (
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6 text-center">
+                    Contribution Heatmap (Last Year)
+                  </h3>
+                  <div className="overflow-x-auto pb-4">
+                    <CalendarHeatmap
+                      startDate={startDate}
+                      endDate={today}
+                      values={heatmapValues}
+                      showMonthLabels={true}
+                      showWeekdayLabels={true}
+                      monthLabelAttributes={{ style: { fontSize: '10px', fill: '#9ca3af' } }}
+                      weekdayLabelAttributes={{ style: { fontSize: '10px', fill: '#9ca3af' } }}
+                      classForValue={(value: { count: number; date: string } | null) => {
+                        if (!value || value.count === 0) return 'color-github-0';
+                        if (value.count <= 1) return 'color-github-1';
+                        if (value.count <= 2) return 'color-github-2';
+                        if (value.count <= 3) return 'color-github-3';
+                        return 'color-github-4';
+                      }}
+                      gutterSize={2}
+                      titleForValue={(value: { date: string; count: number} | null) => value ? `${value.count} contributions on ${new Date(value.date).toLocaleDateString()}` : 'No contributions'}
+                      tooltipDataAttrs={(value: { date: string; count: number}) => ({ 'data-tip': `${value.count} contributions on ${new Date(value.date).toLocaleDateString()}` })}
+                    />
+                  </div>
+                  <div className="flex justify-end items-center mt-4 pr-2">
+                      <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">Less</span>
+                      <svg width="10" height="10" className="mr-1"><rect width="10" height="10" className="color-github-1" rx="2" ry="2"></rect></svg>
+                      <svg width="10" height="10" className="mr-1"><rect width="10" height="10" className="color-github-2" rx="2" ry="2"></rect></svg>
+                      <svg width="10" height="10" className="mr-1"><rect width="10" height="10" className="color-github-3" rx="2" ry="2"></rect></svg>
+                      <svg width="10" height="10" className="mr-2"><rect width="10" height="10" className="color-github-4" rx="2" ry="2"></rect></svg>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">More</span>
+                  </div>
+                  <style jsx global>{`
+                    .react-calendar-heatmap .color-github-0 { fill: #ebedf0; }
+                    .react-calendar-heatmap .color-github-1 { fill: #9be9a8; }
+                    .react-calendar-heatmap .color-github-2 { fill: #40c463; }
+                    .react-calendar-heatmap .color-github-3 { fill: #30a14e; }
+                    .react-calendar-heatmap .color-github-4 { fill: #216e39; }
+                    .react-calendar-heatmap text { font-size: 10px; fill: #6b7280; }
+                    .react-calendar-heatmap rect:hover { stroke: #555; stroke-width: 1px; }
+                  `}</style>
+                  <div className="text-center mt-6">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Last updated: {lastUpdated}</p>
+                  </div>
                 </div>
-                <div className="flex justify-end items-center mt-4 pr-2">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">Less</span>
-                    <svg width="10" height="10" className="mr-1"><rect width="10" height="10" className="color-github-1" rx="2" ry="2"></rect></svg>
-                    <svg width="10" height="10" className="mr-1"><rect width="10" height="10" className="color-github-2" rx="2" ry="2"></rect></svg>
-                    <svg width="10" height="10" className="mr-1"><rect width="10" height="10" className="color-github-3" rx="2" ry="2"></rect></svg>
-                    <svg width="10" height="10" className="mr-2"><rect width="10" height="10" className="color-github-4" rx="2" ry="2"></rect></svg>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">More</span>
+              ) : (
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3 text-center">Recent Activity Summary</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-4">Showing cumulative totals. Detailed heatmap hidden since data is older than 90 days.</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+                      <div className="text-sm text-gray-500">LeetCode</div>
+                      <div className="text-2xl font-bold">{totals.leetcode}</div>
+                    </div>
+                    <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+                      <div className="text-sm text-gray-500">CSES</div>
+                      <div className="text-2xl font-bold">{totals.cses}</div>
+                    </div>
+                    <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center col-span-2 sm:col-span-1">
+                      <div className="text-sm text-gray-500">Codeforces</div>
+                      <div className="text-2xl font-bold">{totals.codeforces}</div>
+                    </div>
+                  </div>
+                  <div className="text-center mt-4">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Last updated: {lastUpdated || 'N/A'}</p>
+                  </div>
                 </div>
-
-                <style jsx global>{`
-                  .react-calendar-heatmap .color-github-0 { fill: #ebedf0; } // GitHub's empty color (light gray)
-                  .react-calendar-heatmap .color-github-1 { fill: #9be9a8; } // GitHub's lightest green
-                  .react-calendar-heatmap .color-github-2 { fill: #40c463; } 
-                  .react-calendar-heatmap .color-github-3 { fill: #30a14e; } 
-                  .react-calendar-heatmap .color-github-4 { fill: #216e39; } // GitHub's darkest green
-                  .react-calendar-heatmap text {
-                    font-size: 10px;
-                    fill: #6b7280; /* Tailwind gray-500 */
-                  }
-                  .react-calendar-heatmap rect:hover {
-                    stroke: #555;
-                    stroke-width: 1px;
-                  }
-                `}</style>
-                <div className="text-center mt-6">
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Last updated: {lastUpdated}
-                  </p>
-                </div>
-              </div>
+              )}
             </div>
           )}
         </section>
       </div>
+      <footer className="border-t border-gray-200 dark:border-gray-700 py-8 text-center text-sm text-gray-500">
+        <div className="flex items-center justify-center gap-6">
+          <Link href="https://github.com/himmannshu" target="_blank" className="hover:underline">GitHub</Link>
+          <Link href="https://www.linkedin.com/in/himanshu00/" target="_blank" className="hover:underline">LinkedIn</Link>
+          <a href="mailto:himanshu@example.com" className="hover:underline">Email</a>
+        </div>
+      </footer>
     </main>
   );
 }
